@@ -1,0 +1,17 @@
+from collections import OrderedDict
+
+# Read the number of strings
+n = int(input())
+
+# Use OrderedDict to maintain insertion order for printing, or a regular dict for general use
+# For Python 3.7+ regular dicts maintain insertion order
+word_counts = OrderedDict()
+
+# Read n strings and count their frequencies
+for _ in range(n):
+    s = input()
+    word_counts[s] = word_counts.get(s, 0) + 1
+
+# Print each unique string and its count
+for s, count in word_counts.items():
+    print(f"{s} {count}")

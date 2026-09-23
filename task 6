@@ -1,0 +1,69 @@
+class Ride:
+    def __init__(self, distance):
+        self.distance = distance
+
+    def calculate_fare(self):
+        return 0
+
+class CarRide(Ride):
+    def __init__(self, distance):
+        super().__init__(distance)
+
+    def calculate_fare(self):
+        return 50 + (self.distance * 15)
+
+class BikeRide(Ride):
+    def __init__(self, distance):
+        super().__init__(distance)
+
+    def calculate_fare(self):
+        return 20 + (self.distance * 8)
+
+class AutoRide(Ride):
+    def __init__(self, distance):
+        super().__init__(distance)
+
+    def calculate_fare(self):
+        return 30 + (self.distance * 10)
+
+def main():
+    try:
+        distance_input = input("Enter distance in km: ")
+        distance = float(distance_input)
+
+        if distance <= 0:
+            raise ValueError("Distance must be greater than 0.")
+
+        print("\nSelect Ride Type:")
+        print("1. Car")
+        print("2. Bike")
+        print("3. Auto")
+
+        choice_input = input("Enter your choice: ")
+        choice = int(choice_input)
+
+        ride = None
+
+        if choice == 1:
+            ride = CarRide(distance)
+        elif choice == 2:
+            ride = BikeRide(distance)
+        elif choice == 3:
+            ride = AutoRide(distance)
+        else:
+            raise ValueError("Invalid ride type.")
+
+        fare = ride.calculate_fare()
+
+        print("\n----- Ride Details -----")
+        print(f"Distance: {distance} km")
+        print(f"Ride Type: {ride.__class__.__name__.replace('Ride', '')}")
+        print(f"Total Fare: Rs.{fare:.2f}")
+
+    except ValueError as e:
+        print(f"Error: {e}")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+
+if __name__ == '__main__':
+    main()
